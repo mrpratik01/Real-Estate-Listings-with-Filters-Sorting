@@ -1,11 +1,8 @@
-// services/propertyService.ts
+import { Property } from "../types/property";
 
-import { Property } from '../types/property';
-
-// This is a mock function that simulates fetching data from an API
+// Fetch all properties
 export const getProperties = async (): Promise<Property[]> => {
-  // Replace with your actual API request, e.g. fetch('/api/properties')
-  const response = await fetch('/api/properties');
+  const response = await fetch(`http://localhost:3000/api/properties`);
   if (!response.ok) {
     throw new Error('Failed to fetch properties');
   }
@@ -13,4 +10,13 @@ export const getProperties = async (): Promise<Property[]> => {
   return data;
 };
 
+// Fetch a single property by ID
+export const getSinglePropertie = async (id: number): Promise<Property | null> => {
+  const response = await fetch(`http://localhost:3000/api/properties?id=${id}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch property');
+  }
+  const data = await response.json();
 
+  return data ? data : null;
+};

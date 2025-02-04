@@ -2,7 +2,7 @@
 
 import { NextApiRequest, NextApiResponse } from "next";
 
-// Sample data for now
+// Sample data for properties
 const properties = [
   {
     id: 1,
@@ -186,11 +186,14 @@ const properties = [
   },
 ];
 
+
+// I handle both the /api/properties and /api/properties/[id] routes in the same file.
+
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const { id } = req.query;
   
     if (id) {
-      // Fetch a single property by its ID
       const property = properties.find((p) => p.id.toString() === id.toString());
   
       if (!property) {
@@ -200,7 +203,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       return res.status(200).json(property);
     }
   
-    // Return all properties if no specific ID is provided
     res.status(200).json(properties);
   
 }

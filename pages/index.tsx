@@ -1,23 +1,17 @@
-// pages/index.tsx
-import { useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
 import PropertyCard from '../components/PropertyCard';
 import { Property } from '../types/property';
 import { getProperties } from '../services/propertyServices';
+import Layout from "../pages/layout"
 
-const HomePage = () => {
-  const [properties, setProperties] = useState<Property[]>([]);
+type HomePageProps = {
+  properties: Property[];
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const propertiesData = await getProperties();
-      setProperties(propertiesData);
-    };
-
-    fetchData();
-  }, []);
-
+const HomePage = ({ properties }: HomePageProps) => {
   return (
-    <div>
+    <Layout>
+       <div>
       <h1>Real Estate Listings</h1>
       <div className="property-list">
         {properties.map((property) => (
@@ -25,7 +19,27 @@ const HomePage = () => {
         ))}
       </div>
     </div>
+    </Layout>
+   
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    const propertiesData = await getProperties();
+    return {
+      props: {
+        properties: propertiesData,
+      },
+    };
+  } catch (error) {
+    console.error('Failed to fetch properties:', error);
+    return {
+      props: {
+        properties: [],
+      },
+    };
+  }
 };
 
 export default HomePage;
