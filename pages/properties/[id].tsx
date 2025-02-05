@@ -2,6 +2,8 @@ import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { Property } from "../../types/property";
 import { getSinglePropertie } from "@/services/propertyServices";
 import Layout from "../layout";
+import Image from "next/image";
+
 const PropertyDetails = ({
   property,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -13,7 +15,9 @@ const PropertyDetails = ({
     <Layout>
       <div>
         <h1>Property Details</h1>
-        <img src={property.image} alt={property.address} />
+        {property.image.map((image, index) => (
+            <Image key={index} src={image} alt={`${property.address} - ${index + 1}`}  />
+          ))}
         <h2>{property.address}</h2>
         <p>{property.size}</p>
         <p>{property.bedrooms} Bedrooms</p>

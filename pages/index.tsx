@@ -1,23 +1,54 @@
 import { GetServerSideProps } from "next";
+import { useState } from "react";
 import PropertyCard from "../components/PropertyCard";
 import { Property } from "../types/property";
-import { getProperties } from "../services/propertyServices";
+import { getProperties, filterProperties, sortProperties } from "../services/propertyServices";
 import Layout from "../pages/layout";
+import Filters from "../components/Filters";
+import Sorting from "../components/Sorting";
 
 type HomePageProps = {
-  properties: Property[];
+  initialProperties: Property[];
 };
 
-const HomePage = ({ properties }: HomePageProps) => {
+const HomePage = ({ initialProperties }: HomePageProps) => {
+  const [properties, setProperties] = useState<Property[]>(initialProperties);
+
+  const handleApplyFilters = (filters: {
+    minPrice?: number;
+    maxPrice?: number;
+    bedrooms?: number;
+  }) => {
+    const filteredProperties = filterProperties(initialProperties, filters);
+    setProperties(filteredProperties);
+  };
+
+  const handleSortChange = (sortBy: 'price-asc' | 'price-desc' | 'recent' | 'size') => {
+    const sortedProperties = sortProperties(properties, sortBy);
+    setProperties(sortedProperties);
+  };
+
   return (
     <Layout>
-      <div>
-        <h1>Real Estate Listings</h1>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 px-4 mx-auto max-w-full ">
+      <div className="container mx-auto px-4">
+        <h1 className="text-2xl font-bold my-4">Real Estate Listings</h1>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Filters onApplyFilters={handleApplyFilters} />
+          <Sorting onSortChange={handleSortChange} />
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-full">
           {properties.map((property) => (
             <PropertyCard key={property.id} property={property} />
           ))}
         </div>
+
+        {properties.length === 0 && (
+          <p className="text-center text-gray-500 mt-8">
+            No properties found matching your criteria.
+          </p>
+        )}
       </div>
     </Layout>
   );
@@ -28,14 +59,14 @@ export const getServerSideProps: GetServerSideProps = async () => {
     const propertiesData = await getProperties();
     return {
       props: {
-        properties: propertiesData,
+        initialProperties: propertiesData,
       },
     };
   } catch (error) {
     console.error("Failed to fetch properties:", error);
     return {
       props: {
-        properties: [],
+        initialProperties: [],
       },
     };
   }

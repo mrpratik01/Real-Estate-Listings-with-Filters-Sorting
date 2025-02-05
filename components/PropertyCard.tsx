@@ -15,7 +15,7 @@ const PropertyCard: FC<PropertyCardProps> = ({ property }) => {
       <Link href={`/properties/${property.id}`} passHref>
         <div className="relative h-56  m-2.5 overflow-hidden text-white rounded-md">
           <Image
-            src={property.image}
+            src={property.image[0]}
             alt={property.address}
             width={500}
             height={500}
