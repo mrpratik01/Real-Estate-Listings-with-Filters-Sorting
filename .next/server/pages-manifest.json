@@ -3,6 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/properties/[id]": "pages/properties/[id].js",
-  "/api/properties": "pages/api/properties.js"
+  "/api/properties": "pages/api/properties.js",
+  "/properties/[id]": "pages/properties/[id].js"
 }

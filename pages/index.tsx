@@ -2,7 +2,11 @@ import { GetServerSideProps } from "next";
 import { useState } from "react";
 import PropertyCard from "../components/PropertyCard";
 import { Property } from "../types/property";
-import { getProperties, filterProperties, sortProperties } from "../services/propertyServices";
+import {
+  getProperties,
+  filterProperties,
+  sortProperties,
+} from "../services/propertyServices";
 import Layout from "../pages/layout";
 import Filters from "../components/Filters";
 import Sorting from "../components/Sorting";
@@ -23,7 +27,9 @@ const HomePage = ({ initialProperties }: HomePageProps) => {
     setProperties(filteredProperties);
   };
 
-  const handleSortChange = (sortBy: 'price-asc' | 'price-desc' | 'recent' | 'size') => {
+  const handleSortChange = (
+    sortBy: "price-asc" | "price-desc" | "recent" | "size"
+  ) => {
     const sortedProperties = sortProperties(properties, sortBy);
     setProperties(sortedProperties);
   };
@@ -31,17 +37,36 @@ const HomePage = ({ initialProperties }: HomePageProps) => {
   return (
     <Layout>
       <div className="container mx-auto px-4">
-        <h1 className="text-2xl font-bold my-4">Real Estate Listings</h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h1 className="text-4xl text-blue-600 text-center font-bold my-4">
+          Real Estate Listings
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
           <Filters onApplyFilters={handleApplyFilters} />
-          <Sorting onSortChange={handleSortChange} />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-full">
-          {properties.map((property) => (
-            <PropertyCard key={property.id} property={property} />
-          ))}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 max-w-full">
+          {/* Properties Section (80% width on large screens) */}
+          <div className="lg:col-span-4 w-full">
+            <Sorting onSortChange={handleSortChange} />
+            <div className="grid grid-cols-1 sm:grid-cols-1 gap-4">
+              {properties.map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))}
+            </div>
+          </div>
+
+          {/* Advertisement Section (20% width on large screens) */}
+          <div className="lg:col-span-1 hidden lg:block bg-gray-100 p-4 rounded-lg shadow-md">
+            <h2 className="text-lg font-semibold mb-3">Sponsored Ad</h2>
+
+            <p className="text-gray-600 mt-2 text-sm">
+              Get amazing deals on real estate! Contact us for more info.
+            </p>
+            <button className="mt-3 bg-blue-600 text-white py-2 px-4 rounded-md w-full">
+              Learn More
+            </button>
+          </div>
         </div>
 
         {properties.length === 0 && (
