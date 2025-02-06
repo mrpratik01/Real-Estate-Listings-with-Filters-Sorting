@@ -37,9 +37,7 @@ const HomePage = ({ initialProperties }: HomePageProps) => {
   return (
     <Layout>
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl text-blue-600 text-center font-bold my-4">
-          Real Estate Listings
-        </h1>
+       
 
         <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
           <Filters onApplyFilters={handleApplyFilters} />

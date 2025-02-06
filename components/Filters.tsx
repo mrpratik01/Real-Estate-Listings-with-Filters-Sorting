@@ -28,7 +28,7 @@ const Filters: React.FC<FiltersProps> = ({ onApplyFilters }) => {
   };
 
   return (
-    <div className="bg-white rounded-3xl shadow-2xl p-6 backdrop-blur-lg border border-gray-100 mb-10">
+    <div className="bg-white rounded-3xl shadow-2xl p-6 backdrop-blur-lg border border-gray-100 mb-10 mt-24 ">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="relative">
           <label className="absolute -top-2.5 left-4 px-1 bg-white text-sm text-gray-600">

@@ -1,24 +1,20 @@
+import React, { useState } from 'react';
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { Property } from "../../types/property";
 import { getSinglePropertie } from "@/services/propertyServices";
 import Layout from "../layout";
 import Image from "next/image";
 import {
-  FaBed,
-  FaBath,
-  FaDollarSign,
-  FaRegBuilding,
-  FaParking,
-  FaEye,
-  FaBuilding,
-  FaUser,
-  FaPhoneAlt,
-  FaCalendarAlt,
+  FaBed, FaBath, FaDollarSign, FaRegBuilding, 
+  FaParking, FaEye, FaBuilding, FaUser, 
+  FaPhoneAlt, FaCalendarAlt, FaChevronDown, FaChevronUp
 } from "react-icons/fa";
 
 const PropertyDetails = ({
   property,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
   if (!property) {
     return (
       <Layout>
@@ -29,121 +25,168 @@ const PropertyDetails = ({
     );
   }
 
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
+
+  const truncateDescription = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
+  };
+
   return (
     <Layout>
-      <div className="mx-auto mt-10 px-4">
+      <div className="container mx-auto px-4 mt-20">
         {/* Image Gallery */}
-        <div className="grid grid-cols-3 gap-2">
-          <div className="col-span-2 group overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+          <div className="col-span-1 md:col-span-2 group overflow-hidden rounded-2xl shadow-2xl">
             <Image
               src={property.image[0]}
-              alt={`${property.address} - 1`}
-              width={800}
-              height={500}
-              className="w-full h-64 object-cover rounded-lg shadow-md transition-transform duration-300 ease-in-out group-hover:scale-110"
+              alt={`${property.address} - Main Image`}
+              width={1000}
+              height={600}
+              className="w-full h-[500px] object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
             />
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="col-span-1 grid grid-rows-2 gap-4">
             {property.image.slice(1, 3).map((image, index) => (
-              <div key={index} className="group overflow-hidden">
+              <div key={index} className="group overflow-hidden rounded-2xl shadow-xl">
                 <Image
                   src={image}
-                  alt={`${property.address} - ${index + 2}`}
-                  width={400}
-                  height={200}
-                  className="w-full h-32 object-cover rounded-lg shadow-md transition-transform duration-300 ease-in-out group-hover:scale-110"
+                  alt={`${property.address} - Additional Image ${index + 1}`}
+                  width={500}
+                  height={250}
+                  className="w-full h-[240px] object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
                 />
               </div>
             ))}
           </div>
         </div>
-      </div>
-      <div className="container mx-auto px-4 mt-10">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 max-w-full">
-          <div className="lg:col-span-4 w-full bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-            <h1 className="text-3xl font-bold text-blue-600 mb-4">
-              {property.address}
-            </h1>
 
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-              Property Details
-            </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+          {/* Main Property Details */}
+          <div className="lg:col-span-4 bg-white p-8 rounded-3xl shadow-2xl space-y-6">
+          <div className="flex flex-col md:flex-row justify-between items-start">
+              <div>
+                <h1 className="text-4xl font-bold text-blue-700 mb-2">
+                  {property.address}
+                </h1>
+                <p className="text-gray-500 text-lg">
+                  {property.propertyType} for Sale
+                </p>
+              </div>
+              
+              {/* Enhanced Pricing Design */}
+              <div className="mt-4 md:mt-0 w-full md:w-auto">
+                <div className="bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-xl p-5 shadow-xl transform transition-all hover:scale-105 hover:shadow-2xl">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm uppercase tracking-wide opacity-75">
+                      Listing Price
+                    </span>
+                    <span className="text-2xl font-black bg-white/20 rounded-full px-3 py-1">
+                      AED
+                    </span>
+                  </div>
+                  <div className="text-4xl font-extrabold mt-2 flex items-center">
+                    {property.price.toLocaleString()}
+                    <span className="text-sm ml-2 opacity-75">
+                      {property.propertyType === 'Apartment' ? '/unit' : ''}
+                    </span>
+                  </div>
+                  <div className="mt-3 text-sm opacity-75 flex justify-between items-center">
+                    <span>Market Value</span>
+                    <span className="bg-green-500 text-white rounded-full px-2 py-1 text-xs">
+                      Competitive
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            <p>{property.description}</p>
 
-            {/* Property Details */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div className="flex items-center text-lg text-gray-700 space-x-3">
-                <FaBed className="w-6 h-6 text-blue-600" />
-                <span>{property.bedrooms} Bedrooms</span>
-              </div>
-              <div className="flex items-center text-lg text-gray-700 space-x-3">
-                <FaBath className="w-6 h-6 text-blue-600" />
-                <span>{property.bathrooms} Bathrooms</span>
-              </div>
-              <div className="flex items-center text-lg text-gray-700 space-x-3">
-                <FaDollarSign className="w-6 h-6 text-blue-600" />
-                <span>AED {property.price}</span>
-              </div>
-              <div className="flex items-center text-lg text-gray-700 space-x-3">
-                <FaRegBuilding className="w-6 h-6 text-blue-600" />
-                <span>{property.propertyType}</span>
-              </div>
-              <div className="flex items-center text-lg text-gray-700 space-x-3">
-                <FaParking className="w-6 h-6 text-blue-600" />
-                <span>{property.parking}</span>
-              </div>
-              <div className="flex items-center text-lg text-gray-700 space-x-3">
-                <FaEye className="w-6 h-6 text-blue-600" />
-                <span>{property.view}</span>
-              </div>
-              <div className="flex items-center text-lg text-gray-700 space-x-3">
-                <FaBuilding className="w-6 h-6 text-blue-600" />
-                <span>{property.balcony}</span>
-              </div>
-              <div className="flex items-center text-lg text-gray-700 space-x-3">
-                <FaCalendarAlt className="w-6 h-6 text-blue-600" />
-                <span>Year Built: {property.yearBuilt}</span>
-              </div>
+            {/* Description with Read More/Less */}
+            <div className="mt-6">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                Property Description
+              </h2>
+              <p className="text-gray-600 leading-relaxed">
+                {showFullDescription 
+                  ? property.description 
+                  : truncateDescription(property.description, 300)}
+              </p>
+              {property.description.length > 300 && (
+                <button 
+                  onClick={toggleDescription} 
+                  className="mt-2 text-blue-600 hover:text-blue-800 flex items-center font-semibold"
+                >
+                  {showFullDescription ? 'Show Less' : 'Read More'}
+                  {showFullDescription ? <FaChevronUp className="ml-2" /> : <FaChevronDown className="ml-2" />}
+                </button>
+              )}
+            </div>
+
+            {/* Property Features Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+              {[
+                { icon: FaBed, text: `${property.bedrooms} Bedrooms` },
+                { icon: FaBath, text: `${property.bathrooms} Bathrooms` },
+                { icon: FaRegBuilding, text: property.propertyType },
+                { icon: FaParking, text: property.parking },
+                { icon: FaEye, text: property.view },
+                { icon: FaBuilding, text: property.balcony },
+                { icon: FaCalendarAlt, text: `Built ${property.yearBuilt}` }
+              ].map(({ icon: Icon, text }, index) => (
+                <div 
+                  key={index} 
+                  className="bg-blue-50 p-4 rounded-xl flex items-center space-x-3 hover:bg-blue-100 transition-colors"
+                >
+                  <Icon className="text-blue-600 w-6 h-6" />
+                  <span className="text-gray-700 font-medium">{text}</span>
+                </div>
+              ))}
             </div>
 
             {/* Agent Details */}
-            <div className="bg-gray-50 p-6 rounded-lg shadow-lg mt-6">
-              <h2 className="text-xl font-bold text-gray-800 mb-4">
-                Agent Details
-              </h2>
-              <div className="flex items-center text-lg text-gray-700 space-x-3 mb-4">
-                <FaUser className="w-6 h-6 text-blue-600" />
-                <span>{property.agentName}</span>
+            <div className="bg-gray-50 p-6 rounded-2xl mt-8 flex justify-between items-center">
+              <div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  Contact Agent
+                </h3>
+                <div className="flex items-center space-x-3">
+                  <FaUser className="text-blue-600 w-5 h-5" />
+                  <span className="text-gray-700 font-medium">
+                    {property.agentName}
+                  </span>
+                </div>
+                <div className="flex items-center space-x-3 mt-2">
+                  <FaPhoneAlt className="text-blue-600 w-5 h-5" />
+                  <span className="text-gray-700">
+                    {property.agentContact}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center text-lg text-gray-700 space-x-3">
-                <FaPhoneAlt className="w-6 h-6 text-blue-600" />
-                <span>{property.agentContact}</span>
-              </div>
-            </div>
-
-            {/* Added Date */}
-            <div className="mt-6">
-              <span className="text-gray-500 text-sm">
-                Added on: {property.added}
-              </span>
+              <button className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors">
+                Contact Now
+              </button>
             </div>
           </div>
 
-          <div className="lg:col-span-1 hidden lg:block bg-gray-100 p-4 rounded-lg shadow-md">
-            <h2 className="text-lg font-semibold mb-3">Sponsored Ad</h2>
-
-            <p className="text-gray-600 mt-2 text-sm">
-              Get amazing deals on real estate! Contact us for more info.
-            </p>
-            <button className="mt-3 bg-blue-600 text-white py-2 px-4 rounded-md w-full">
-              Learn More
-            </button>
+          {/* Sponsored Ad */}
+          <div className="lg:col-span-1 bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-3xl shadow-xl">
+            <div className="text-center">
+              <h2 className="text-xl font-bold text-blue-800 mb-4">
+                Hot Property Alert
+              </h2>
+              <p className="text-gray-700 mb-4">
+                Discover exclusive real estate opportunities and investment insights.
+              </p>
+              <button className="w-full bg-blue-600 text-white py-3 rounded-full hover:bg-blue-700 transition-colors">
+                Get Insights
+              </button>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Property Details */}
     </Layout>
   );
 };
