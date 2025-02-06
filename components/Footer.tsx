@@ -1,6 +1,6 @@
 
 import { FC } from "react";
-import { FaHome, FaBuilding, FaCity } from "react-icons/fa";
+import {  FaCity } from "react-icons/fa";
 
 const Footer: FC <any> = ( ) => {
     return (

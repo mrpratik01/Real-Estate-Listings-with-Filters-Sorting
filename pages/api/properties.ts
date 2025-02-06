@@ -1,4 +1,4 @@
-// pages/api/properties.ts
+
 import property1 from "../../public/images/property1/property1.1.webp";
 import property102 from "../../public/images/property1/property1.2.webp";
 import property103 from "../../public/images/property1/property1.3.webp";

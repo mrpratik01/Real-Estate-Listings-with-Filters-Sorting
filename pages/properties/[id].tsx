@@ -7,7 +7,6 @@ import Image from "next/image";
 import {
   FaBed,
   FaBath,
-  FaDollarSign,
   FaRegBuilding,
   FaParking,
   FaEye,
@@ -46,9 +45,7 @@ const PropertyDetails = ({
   return (
     <Layout>
       <div className="container mx-auto px-4 mt-20">
-   
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-
           <div className="col-span-1 md:col-span-2 group overflow-hidden rounded-2xl shadow-2xl">
             <Image
               src={property.image[0]}
@@ -78,7 +75,6 @@ const PropertyDetails = ({
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-10">
-
           <div className="lg:col-span-4 bg-white p-8 rounded-3xl shadow-2xl space-y-6">
             <div className="flex flex-col md:flex-row justify-between items-start">
               <div>
@@ -90,7 +86,6 @@ const PropertyDetails = ({
                 </p>
               </div>
 
-              {/* Enhanced Pricing Design */}
               <div className="mt-4 md:mt-0 w-full md:w-auto">
                 <div className="bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-xl p-5 shadow-xl transform transition-all hover:scale-105 hover:shadow-2xl">
                   <div className="flex items-center justify-between">
@@ -117,7 +112,6 @@ const PropertyDetails = ({
               </div>
             </div>
 
-            {/* Description with Read More/Less */}
             <div className="mt-6 ">
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                 Property Description
@@ -142,7 +136,6 @@ const PropertyDetails = ({
               )}
             </div>
 
-            {/* Property Features Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
               {[
                 { icon: FaBed, text: `${property.bedrooms} Bedrooms` },
@@ -163,10 +156,8 @@ const PropertyDetails = ({
               ))}
             </div>
 
-            {/* Agent Details */}
             <div className="bg-gray-50 p-4 md:p-6 rounded-2xl mt-8">
               <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-6">
-                {/* Agent Information */}
                 <div className="space-y-3">
                   <h3 className="text-xl font-bold text-gray-800">
                     Contact Agent
@@ -185,7 +176,6 @@ const PropertyDetails = ({
                   </div>
                 </div>
 
-                {/* Contact Button */}
                 <button className="w-full md:w-auto bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition-colors text-center whitespace-nowrap">
                   Contact Now
                 </button>
@@ -193,7 +183,6 @@ const PropertyDetails = ({
             </div>
           </div>
 
-          {/* Sponsored Ad */}
           <div className="lg:col-span-1 bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-3xl shadow-xl">
             <div className="text-center">
               <h2 className="text-xl font-bold text-blue-800 mb-4">
