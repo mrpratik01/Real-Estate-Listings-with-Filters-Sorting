@@ -36,15 +36,12 @@ const HomePage = ({ initialProperties }: HomePageProps) => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4">
-       
-
+      <div className="container mx-auto px-4 mb-10">
         <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
           <Filters onApplyFilters={handleApplyFilters} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 max-w-full">
-          {/* Properties Section (80% width on large screens) */}
           <div className="lg:col-span-4 w-full">
             <Sorting onSortChange={handleSortChange} />
             <div className="grid grid-cols-1 sm:grid-cols-1 gap-4">
@@ -54,7 +51,6 @@ const HomePage = ({ initialProperties }: HomePageProps) => {
             </div>
           </div>
 
-          {/* Advertisement Section (20% width on large screens) */}
           <div className="lg:col-span-1 hidden lg:block bg-gray-100 p-4 rounded-lg shadow-md">
             <h2 className="text-lg font-semibold mb-3">Sponsored Ad</h2>
 

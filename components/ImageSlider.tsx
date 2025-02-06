@@ -28,7 +28,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images, linkHref }) => {
   };
 
   return (
-    <div className="relative w-full h-full min-h-[300px] sm:min-h-[400px]">
+    <div className="relative w-full h-full min-h-[300px] sm:min-h-[280px]">
       <Link href={linkHref} className="block w-full h-full">
         <div className="relative w-full h-full">
           <Image
@@ -36,7 +36,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ images, linkHref }) => {
             alt={`Property Image ${currentIndex + 1}`}
             width={800}
             height={600}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover "
             priority
           />
         </div>
