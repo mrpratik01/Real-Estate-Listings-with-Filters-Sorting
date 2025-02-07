@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import PropertyCard from "../components/PropertyCard";
 import { Property } from "../types/property";
 import {
@@ -16,54 +16,52 @@ type HomePageProps = {
 };
 
 const HomePage = ({ initialProperties }: HomePageProps) => {
-  const [properties, setProperties] = useState<Property[]>(initialProperties);
+  const [filters, setFilters] = useState<{ minPrice?: number; maxPrice?: number; bedrooms?: number }>({});
+  const [sortBy, setSortBy] = useState<"price-asc" | "price-desc" | "recent" | "size">("recent");
 
-  const handleApplyFilters = (filters: {
-    minPrice?: number;
-    maxPrice?: number;
-    bedrooms?: number;
-  }) => {
-    const filteredProperties = filterProperties(initialProperties, filters);
-    setProperties(filteredProperties);
-  };
+  const filteredAndSortedProperties = useMemo(() => {
+    let result = filterProperties(initialProperties, filters);
+    return sortProperties(result, sortBy);
+  }, [initialProperties, filters, sortBy]);
 
-  const handleSortChange = (
-    sortBy: "price-asc" | "price-desc" | "recent" | "size"
-  ) => {
-    const sortedProperties = sortProperties(properties, sortBy);
-    setProperties(sortedProperties);
-  };
+  const handleApplyFilters = useCallback((newFilters: typeof filters) => {
+    setFilters(newFilters);
+  }, []);
+
+  const handleSortChange = useCallback((newSortBy: typeof sortBy) => {
+    setSortBy(newSortBy);
+  }, []);
 
   return (
     <Layout>
       <div className="container mx-auto px-4 mb-10">
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+        <div className="grid md:grid-cols-1 gap-4">
           <Filters onApplyFilters={handleApplyFilters} />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 max-w-full">
-          <div className="lg:col-span-4 w-full">
+        <div className="grid lg:grid-cols-5 gap-4">
+          <div className="lg:col-span-4">
             <Sorting onSortChange={handleSortChange} />
-            <div className="grid grid-cols-1 sm:grid-cols-1 gap-4">
-              {properties.map((property) => (
+            <div className="grid sm:grid-cols-1 gap-4">
+              {filteredAndSortedProperties.map((property) => (
                 <PropertyCard key={property.id} property={property} />
               ))}
             </div>
           </div>
 
-          <div className="lg:col-span-1 hidden lg:block bg-gray-100 p-4 rounded-lg shadow-md">
+     
+          <aside className="lg:col-span-1 hidden lg:block bg-gray-100 p-4 rounded-lg shadow-md">
             <h2 className="text-lg font-semibold mb-3">Sponsored Ad</h2>
-
             <p className="text-gray-600 mt-2 text-sm">
               Get amazing deals on real estate! Contact us for more info.
             </p>
             <button className="mt-3 bg-blue-600 text-white py-2 px-4 rounded-md w-full">
               Learn More
             </button>
-          </div>
+          </aside>
         </div>
 
-        {properties.length === 0 && (
+        {filteredAndSortedProperties.length === 0 && (
           <p className="text-center text-gray-500 mt-8">
             No properties found matching your criteria.
           </p>
@@ -76,18 +74,10 @@ const HomePage = ({ initialProperties }: HomePageProps) => {
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const propertiesData = await getProperties();
-    return {
-      props: {
-        initialProperties: propertiesData,
-      },
-    };
+    return { props: { initialProperties: propertiesData } };
   } catch (error) {
     console.error("Failed to fetch properties:", error);
-    return {
-      props: {
-        initialProperties: [],
-      },
-    };
+    return { props: { initialProperties: [] } };
   }
 };
 

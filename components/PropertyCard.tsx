@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo, useMemo } from "react";
 import { Property } from "../types/property";
 import Link from "next/link";
 import ImageSlider from "./ImageSlider";
@@ -11,10 +11,12 @@ interface PropertyCardProps {
   property: Property;
 }
 
-const PropertyCard: FC<PropertyCardProps> = ({ property }) => {
-  const formattedDate = formatDistance(new Date(property.added), new Date(), {
-    addSuffix: true,
-  });
+const PropertyCard: FC<PropertyCardProps> = memo(({ property }) => {
+  const formattedDate = useMemo(() => {
+    return formatDistance(new Date(property.added), new Date(), {
+      addSuffix: true,
+    });
+  }, [property.added]);
 
   const formattedPrice = new Intl.NumberFormat("en-AE", {
     style: "currency",
@@ -116,6 +118,6 @@ const PropertyCard: FC<PropertyCardProps> = ({ property }) => {
       </div>
     </div>
   );
-};
+});
 
 export default PropertyCard;
