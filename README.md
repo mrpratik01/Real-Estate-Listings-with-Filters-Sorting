@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CODE ASSESSMENT SUBMITTED BY PRATIK BHATTARAI #
+# EMAIL : contactpratik2002@gmail.com 
+# Phone No: +971 52 813 9069
 
-## Getting Started
+This assessment is given by david sir to test the 
+- coding skills
+- UI/UX knowledge
+- Responsivness 
 
-First, run the development server:
+I have developed the Real Estate property listing page. User can view all the available properties available for sales and can view details of properties like images, description, features, pricing, and seller information. User can filter the properties by min price and maximum price, no bedrooms and user can view the properties by sorting (newest, price hight to low, low to high, and size ) 
 
-```bash
-npm run dev
-# or
+To give look and feel, i have added Navbar and footer with dummy like to give real look on the project. 
+
+To run the project 
+
+Clone the reprository 
+git clone https://github.com/mrpratik01/Real-Estate-Listings-with-Filters-Sorting.git
+
+
+install all the dependiences used in this project 
+npm install
+or yarn install
+
+Run the Applicaiton by running the command 
+npm run dev 
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Features included in the Webapp
 
-## Learn More
+1. Code Optimization
+2. SSR 
+3. Filtering 
+3. Responsive design 
+4. Error Handling
+5. Reusable Components
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+NOTES:
+I have used images from the different online portal to give real look and feel.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+I have used different AI tools like, ChatGPT, sonnet 3.5, prepexility for coding and optimizing my webApp. 
 
-## Deploy on Vercel
+This project is just developed to showcase the skills which i gain throught my carrer. 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+

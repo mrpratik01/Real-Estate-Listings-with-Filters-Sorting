@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/router";
 import type { AppProps } from "next/app";
@@ -11,6 +12,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const handleStart = useMemo(() => () => setLoading(true), []);
   const handleStop = useMemo(() => () => setLoading(false), []);
+
+  // useEffect to handle the route change events
 
   useEffect(() => {
     if (isMounted.current) return; 

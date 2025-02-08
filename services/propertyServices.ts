@@ -1,3 +1,6 @@
+
+//Fetching data from the API router and filtering and sorting the data based on the user's input.
+
 import { Property } from "../types/property";
 
 export const getProperties = async (): Promise<Property[]> => {
@@ -6,8 +9,14 @@ export const getProperties = async (): Promise<Property[]> => {
     throw new Error('Failed to fetch properties');
   }
   const data = await response.json();
+
+  // returned data is an array of properties
+
   return data;
 };
+
+
+// Fetching a single property based on the ID
 
 export const getSinglePropertie = async (id: number): Promise<Property | null> => {
   const response = await fetch(`http://localhost:3000/api/properties?id=${id}`);
@@ -18,6 +27,8 @@ export const getSinglePropertie = async (id: number): Promise<Property | null> =
   return data ? data : null;
 };
 
+// Filtering the properties based on the user's input
+
 export const filterProperties = (
   properties: Property[], 
   filters: {
@@ -26,6 +37,9 @@ export const filterProperties = (
     bedrooms?: number;
   }
 ): Property[] => {
+
+  // use filter method to filter the properties based on the user's input
+
   return properties.filter(property => {
     if (filters.minPrice && property.price < filters.minPrice) return false;
     if (filters.maxPrice && property.price > filters.maxPrice) return false;
@@ -33,6 +47,8 @@ export const filterProperties = (
     return true;
   });
 };
+
+// Sorting the properties based on the user's input
 
 export const sortProperties = (
   properties: Property[], 

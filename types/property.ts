@@ -1,3 +1,5 @@
+// I defined property interface in different file for better code readility and maintainability.
+
 export interface Property {
   id: number;
   image: string[];

@@ -1,3 +1,5 @@
+//importing all the necessary modules
+
 import { GetServerSideProps } from "next";
 import { useState, useMemo, useCallback } from "react";
 import PropertyCard from "../components/PropertyCard";
@@ -16,13 +18,22 @@ type HomePageProps = {
 };
 
 const HomePage = ({ initialProperties }: HomePageProps) => {
+
+  //using useState to set the filters and sortby
+
   const [filters, setFilters] = useState<{ minPrice?: number; maxPrice?: number; bedrooms?: number }>({});
   const [sortBy, setSortBy] = useState<"price-asc" | "price-desc" | "recent" | "size">("recent");
+
+  // memoizing the filtered and sorted properties
 
   const filteredAndSortedProperties = useMemo(() => {
     let result = filterProperties(initialProperties, filters);
     return sortProperties(result, sortBy);
   }, [initialProperties, filters, sortBy]);
+
+
+  //using useCallback to handle the apply filters and sort change
+
 
   const handleApplyFilters = useCallback((newFilters: typeof filters) => {
     setFilters(newFilters);

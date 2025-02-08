@@ -1,3 +1,5 @@
+// importing all the necessary modules
+
 import React, { useState, useMemo } from "react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { Property } from "../../types/property";
@@ -26,6 +28,9 @@ const PropertyDetails = ({
   }
 
   const toggleDescription = () => setShowFullDescription((prev) => !prev);
+
+
+  // using useMemo to truncate the description
 
   const truncatedDescription = useMemo(() => (
     showFullDescription ? property.description : property.description.slice(0, 300) + "..."

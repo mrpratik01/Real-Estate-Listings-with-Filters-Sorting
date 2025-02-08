@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback } from "react";
 
 interface FiltersProps {
   onApplyFilters: (filters: {
@@ -9,19 +9,27 @@ interface FiltersProps {
 }
 
 const Filters: React.FC<FiltersProps> = ({ onApplyFilters }) => {
+  // using useState to set the filters
+
   const [filters, setFilters] = useState({
     minPrice: "",
     maxPrice: "",
     bedrooms: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  // Handle changes and update the state accordingly
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFilters((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
+
+  // Handle the apply filters
 
   const handleApplyFilters = useCallback(() => {
     const appliedFilters = {
@@ -30,17 +38,31 @@ const Filters: React.FC<FiltersProps> = ({ onApplyFilters }) => {
       bedrooms: filters.bedrooms ? Number(filters.bedrooms) : undefined,
     };
     onApplyFilters(appliedFilters);
+
+    // Calling the onApplyFilters function to pass the applied filters back to the parent
   }, [filters, onApplyFilters]);
 
   return (
     <div className="bg-white rounded-3xl shadow-2xl p-6 backdrop-blur-lg border border-gray-100 mb-10 mt-24">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {[
-          { label: "Min Price", name: "minPrice", type: "number", placeholder: "Enter minimum price" },
-          { label: "Max Price", name: "maxPrice", type: "number", placeholder: "Enter maximum price" },
+          {
+            label: "Min Price",
+            name: "minPrice",
+            type: "number",
+            placeholder: "Enter minimum price",
+          },
+          {
+            label: "Max Price",
+            name: "maxPrice",
+            type: "number",
+            placeholder: "Enter maximum price",
+          },
         ].map(({ label, name, type, placeholder }) => (
           <div key={name} className="relative">
-            <label className="absolute -top-2.5 left-4 px-1 bg-white text-sm text-gray-600">{label}</label>
+            <label className="absolute -top-2.5 left-4 px-1 bg-white text-sm text-gray-600">
+              {label}
+            </label>
             <input
               type={type}
               name={name}
@@ -53,7 +75,9 @@ const Filters: React.FC<FiltersProps> = ({ onApplyFilters }) => {
         ))}
 
         <div className="relative">
-          <label className="absolute -top-2.5 left-4 px-1 bg-white text-sm text-gray-600">Bedrooms</label>
+          <label className="absolute -top-2.5 left-4 px-1 bg-white text-sm text-gray-600">
+            Bedrooms
+          </label>
           <select
             name="bedrooms"
             value={filters.bedrooms}
@@ -62,7 +86,9 @@ const Filters: React.FC<FiltersProps> = ({ onApplyFilters }) => {
           >
             <option value="">All Bedrooms</option>
             {[1, 2, 3, 4].map((num) => (
-              <option key={num} value={num}>{num} {num === 4 ? "+" : ""} Bedrooms</option>
+              <option key={num} value={num}>
+                {num} {num === 4 ? "+" : ""} Bedrooms
+              </option>
             ))}
           </select>
         </div>
