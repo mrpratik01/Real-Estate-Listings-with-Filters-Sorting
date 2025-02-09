@@ -2,10 +2,8 @@ import { useState } from "react";
 import { FaHome, FaBuilding, FaCity, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 
-// Either remove FC and use regular function declaration:
 const Navbar = () => {
-  // Or if you prefer using FC, define it without props:
-  // const Navbar: FC = () => {
+ 
   const [isOpen, setIsOpen] = useState(false);
 
   return (

@@ -13,6 +13,7 @@ import {
 import Layout from "../pages/layout";
 import Filters from "../components/Filters";
 import Sorting from "../components/Sorting";
+import Loader from "../components/common/loader"
 
 type HomePageProps = {
   initialProperties: Property[];
@@ -24,7 +25,7 @@ const HomePage = ({ initialProperties }: HomePageProps) => {
 
   const [filters, setFilters] = useState<{ minPrice?: number; maxPrice?: number; bedrooms?: number }>({});
   const [sortBy, setSortBy] = useState<SortOption>("recent");
-
+  const [isLoading, setIsLoading] = useState(false);
 
   // memoizing the filtered and sorted properties
 
@@ -38,7 +39,12 @@ const HomePage = ({ initialProperties }: HomePageProps) => {
 
 
   const handleApplyFilters = useCallback((newFilters: typeof filters) => {
+    setIsLoading(true);
     setFilters(newFilters);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500); // loading delay for better experience
   }, []);
 
   const handleSortChange = useCallback((newSortBy: SortOption) => {
@@ -56,9 +62,13 @@ const HomePage = ({ initialProperties }: HomePageProps) => {
           <div className="lg:col-span-4">
             <Sorting onSortChange={handleSortChange} />
             <div className="grid sm:grid-cols-1 gap-4">
-              {filteredAndSortedProperties.map((property) => (
-                <PropertyCard key={property.id} property={property} />
-              ))}
+            {isLoading ? (
+            <Loader />
+          ) : (
+            filteredAndSortedProperties.map((property) => (
+              <PropertyCard key={property.id} property={property} />
+            ))
+          )}
             </div>
           </div>
 
