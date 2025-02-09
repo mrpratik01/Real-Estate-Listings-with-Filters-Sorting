@@ -5,6 +5,9 @@ interface SortingProps {
   onSortChange: (sortBy: SortOption) => void;
 }
 
+
+// Sorting component to handle the sorting of the properties
+
 const Sorting: React.FC<SortingProps> = ({ onSortChange }) => {
   return (
     <div className="flex mb-5 justify-end rounded">

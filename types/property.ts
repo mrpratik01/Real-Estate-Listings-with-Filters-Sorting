@@ -3,6 +3,7 @@
 export interface Property {
   id: number;
   image: string[];
+  
   address: string;
   size: string;
   bedrooms: number;

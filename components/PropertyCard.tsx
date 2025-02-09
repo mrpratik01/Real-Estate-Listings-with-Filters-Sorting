@@ -12,7 +12,6 @@ interface PropertyCardProps {
 }
 
 const PropertyCard: FC<PropertyCardProps> = memo(({ property }) => {
-
   // using useMemo to format the date
 
   const formattedDate = useMemo(() => {
@@ -113,7 +112,7 @@ const PropertyCard: FC<PropertyCardProps> = memo(({ property }) => {
                   </div>
                 </div>
 
-                <div className="block w-48  text-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl transition-all duration-300 font-medium hover:shadow-lg hover:shadow-blue-100">
+                <div className="block w-full md:w-48  text-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl transition-all duration-300 font-medium hover:shadow-lg hover:shadow-blue-100">
                   View Details
                 </div>
               </div>

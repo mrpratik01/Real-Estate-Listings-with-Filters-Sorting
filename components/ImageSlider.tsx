@@ -7,6 +7,9 @@ interface ImageSliderProps {
   linkHref: string;
 }
 
+
+// ImageSlider component
+
 const ImageSlider: React.FC<ImageSliderProps> = ({ images, linkHref }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 

@@ -151,7 +151,13 @@ const PropertyDetails = ({
             </div>
           </div>
         </div>
+
+        
+
+
       </div>
+
+
     </Layout>
   );
 };

@@ -2,6 +2,8 @@ import { FC, useState } from "react";
 import { FaHome, FaBuilding, FaCity, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 
+// Navbar component
+
 const Navbar: FC<any> = () => {
   const [isOpen, setIsOpen] = useState(false);
 
