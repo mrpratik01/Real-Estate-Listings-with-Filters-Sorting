@@ -1,7 +1,9 @@
 **🏡 Real Estate Listings with Filters & Sorting**
 
 Author: Pratik Bhattarai
+
 📧 Email: contactpratik2002@gmail.com
+
 📞 Phone: +971 52 813 9069
 
 **📌 Project Overview**
