@@ -8,10 +8,6 @@ Author: Pratik Bhattarai
 
 This project is a Real Estate Property Listing Page that allows users to browse available properties for sale. Users can view property details such as images, descriptions, features, pricing, and seller information. The application includes advanced filtering and sorting options for a seamless browsing experience.
 
-This assessment was given by David Sir to evaluate:
-✅ Coding skills
-✅ UI/UX knowledge
-✅ Responsiveness
 
 **🚀 Features**
 
