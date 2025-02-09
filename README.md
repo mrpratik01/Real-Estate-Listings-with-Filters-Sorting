@@ -1,10 +1,5 @@
 **🏡 Real Estate Listings with Filters & Sorting**
 
-Author: Pratik Bhattarai
-
-📧 Email: contactpratik2002@gmail.com
-
-📞 Phone: +971 52 813 9069
 
 **📌 Project Overview**
 
@@ -40,6 +35,14 @@ This project is a Real Estate Property Listing Page that allows users to browse 
 
 🔹 Next.js, TypeScript, Tailwind CSS and other library
 
-**📬 Contact**
-📧 contactpratik2002@gmail.com
-📞 +971 52 813 9069
+**🗒️ NOTES**
+- All images used in this project are sourced from the internet.
+  
+- AI tools like ChatGPT, Claude.ai, and Perplexity were utilized during development.
+  
+- This project is created solely to showcase my skills and is not affiliated with any organization.
+  
+- The content and functionalities are for demonstration purposes only.
+  
+- No commercial use, business operations, or official representations are associated with this project.
+
