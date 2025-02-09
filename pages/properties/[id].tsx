@@ -1,5 +1,3 @@
-// importing all the necessary modules
-
 import React, { useState, useMemo } from "react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { Property } from "../../types/property";
@@ -17,6 +15,12 @@ const PropertyDetails = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
+  // Move useMemo before any conditional returns
+  const truncatedDescription = useMemo(() => {
+    if (!property) return "";
+    return showFullDescription ? property.description : property.description.slice(0, 300) + "...";
+  }, [showFullDescription, property?.description]);
+
   if (!property) {
     return (
       <Layout>
@@ -28,13 +32,6 @@ const PropertyDetails = ({
   }
 
   const toggleDescription = () => setShowFullDescription((prev) => !prev);
-
-
-  // using useMemo to truncate the description
-
-  const truncatedDescription = useMemo(() => (
-    showFullDescription ? property.description : property.description.slice(0, 300) + "..."
-  ), [showFullDescription, property.description]);
 
   const propertyFeatures = [
     { icon: FaBed, text: `${property.bedrooms} Bedrooms` },
@@ -151,13 +148,7 @@ const PropertyDetails = ({
             </div>
           </div>
         </div>
-
-        
-
-
       </div>
-
-
     </Layout>
   );
 };

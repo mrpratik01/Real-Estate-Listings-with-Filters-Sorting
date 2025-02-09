@@ -18,7 +18,7 @@ const PropertyCard: FC<PropertyCardProps> = memo(({ property }) => {
     return formatDistance(new Date(property.added), new Date(), {
       addSuffix: true,
     });
-  }, [property.added]);
+  }, [property]);
 
   // using Intl.NumberFormat to format the price
 
@@ -47,7 +47,7 @@ const PropertyCard: FC<PropertyCardProps> = memo(({ property }) => {
           </div>
         </div>
 
-        <Link href={`/properties/${property.id}`}>
+        <Link href={`/properties/${property.id}`} prefetch={true}>
           <div className="flex-1 p-4 sm:p-6 -mt-14 md:-mt-0">
             <div className="flex flex-col h-full space-y-4">
               <div className="space-y-2">
@@ -123,5 +123,8 @@ const PropertyCard: FC<PropertyCardProps> = memo(({ property }) => {
     </div>
   );
 });
+
+
+PropertyCard.displayName = "PropertyCard";
 
 export default PropertyCard;

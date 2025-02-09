@@ -1,10 +1,11 @@
-import { FC, useState } from "react";
+import { useState } from "react";
 import { FaHome, FaBuilding, FaCity, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 
-// Navbar component
-
-const Navbar: FC<any> = () => {
+// Either remove FC and use regular function declaration:
+const Navbar = () => {
+  // Or if you prefer using FC, define it without props:
+  // const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -53,14 +54,18 @@ const Navbar: FC<any> = () => {
         }`}
       >
         <div className="flex flex-col items-center space-y-4">
-          <div className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors cursor-pointer">
-            <FaHome className="w-5 h-5" />
-            <span className="font-medium">Home</span>
-          </div>
-          <div className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors cursor-pointer">
-            <FaBuilding className="w-5 h-5" />
-            <span className="font-medium">Properties</span>
-          </div>
+          <Link href="/">
+            <div className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors cursor-pointer">
+              <FaHome className="w-5 h-5" />
+              <span className="font-medium">Home</span>
+            </div>
+          </Link>
+          <Link href="/properties">
+            <div className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors cursor-pointer">
+              <FaBuilding className="w-5 h-5" />
+              <span className="font-medium">Properties</span>
+            </div>
+          </Link>
         </div>
       </div>
     </nav>

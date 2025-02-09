@@ -29,7 +29,7 @@ const HomePage = ({ initialProperties }: HomePageProps) => {
   // memoizing the filtered and sorted properties
 
   const filteredAndSortedProperties = useMemo(() => {
-    let result = filterProperties(initialProperties, filters);
+    const result = filterProperties(initialProperties, filters);
     return sortProperties(result, sortBy);
   }, [initialProperties, filters, sortBy]);
 
