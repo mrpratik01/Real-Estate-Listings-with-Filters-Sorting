@@ -1,50 +1,47 @@
-# CODE ASSESSMENT SUBMITTED BY PRATIK BHATTARAI #
-# EMAIL : contactpratik2002@gmail.com 
-# Phone No: +971 52 813 9069
+**🏡 Real Estate Listings with Filters & Sorting**
 
-This assessment is given by david sir to test the 
-- coding skills
-- UI/UX knowledge
-- Responsivness 
+Author: Pratik Bhattarai
+📧 Email: contactpratik2002@gmail.com
+📞 Phone: +971 52 813 9069
 
-I have developed the Real Estate property listing page. User can view all the available properties available for sales and can view details of properties like images, description, features, pricing, and seller information. User can filter the properties by min price and maximum price, no bedrooms and user can view the properties by sorting (newest, price hight to low, low to high, and size ) 
+**📌 Project Overview**
 
-To give look and feel, i have added Navbar and footer with dummy like to give real look on the project. 
+This project is a Real Estate Property Listing Page that allows users to browse available properties for sale. Users can view property details such as images, descriptions, features, pricing, and seller information. The application includes advanced filtering and sorting options for a seamless browsing experience.
 
-To run the project 
+This assessment was given by David Sir to evaluate:
+✅ Coding skills
+✅ UI/UX knowledge
+✅ Responsiveness
 
-Clone the reprository 
-git clone https://github.com/mrpratik01/Real-Estate-Listings-with-Filters-Sorting.git
+**🚀 Features**
 
+✔ Filter properties by price & bedrooms
+✔ Sort by newest, price, or size
+✔ Responsive design
+✔ Optimized & reusable components
+✔ Error handling
 
-install all the dependiences used in this project 
-npm install
-or yarn install
+**📥 Installation**
 
-Run the Applicaiton by running the command 
-npm run dev 
-yarn dev
+**Clone the repository:**
 
-
-
-Features included in the Webapp
-
-1. Code Optimization
-2. SSR 
-3. Filtering 
-3. Responsive design 
-4. Error Handling
-5. Reusable Components
+`git clone https://github.com/mrpratik01/Real-Estate-Listings-with-Filters-Sorting.git`
 
 
-NOTES:
-I have used images from the different online portal to give real look and feel.
+**Install dependencies:**
 
-I have used different AI tools like, ChatGPT, sonnet 3.5, prepexility for coding and optimizing my webApp. 
+`npm install  # or yarn install
+`
 
-This project is just developed to showcase the skills which i gain throught my carrer. 
+**Run the app:**
 
+`npm run dev  # or yarn dev
+`
 
+**⚙️ Tech Stack**
 
+🔹 Next.js, TypeScript, Tailwind CSS and other library
 
-
+**📬 Contact**
+📧 contactpratik2002@gmail.com
+📞 +971 52 813 9069
