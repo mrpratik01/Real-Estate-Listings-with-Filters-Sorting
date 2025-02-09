@@ -17,6 +17,12 @@ const Filters: React.FC<FiltersProps> = ({ onApplyFilters }) => {
     bedrooms: "",
   });
 
+  const initialFilters = {
+    minPrice: "",
+    maxPrice: "",
+    bedrooms: "",
+  };
+
   // Handle changes and update the state accordingly
 
   const handleChange = (
@@ -41,6 +47,11 @@ const Filters: React.FC<FiltersProps> = ({ onApplyFilters }) => {
 
     // Calling the onApplyFilters function to pass the applied filters back to the parent
   }, [filters, onApplyFilters]);
+
+  const handleClearFilters = useCallback(() => {
+    setFilters(initialFilters);
+    onApplyFilters({});
+  }, [onApplyFilters]);
 
   return (
     <div className="bg-white rounded-3xl shadow-2xl p-6 backdrop-blur-lg border border-gray-100 mb-10 mt-24">
@@ -93,13 +104,22 @@ const Filters: React.FC<FiltersProps> = ({ onApplyFilters }) => {
           </select>
         </div>
 
-        <button
-          onClick={handleApplyFilters}
-          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl shadow-lg hover:shadow-xl 
-          transform hover:-translate-y-0.5 transition duration-200 font-semibold"
-        >
-          Apply Filters
-        </button>
+        <div className="flex flex-row md:flex-col  gap-2 -mt-2">
+          <button
+            onClick={handleApplyFilters}
+            className="w-44 px-2 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl shadow-lg hover:shadow-xl 
+    transform hover:-translate-y-0.5 transition duration-200 font-semibold text-sm"
+          >
+            Apply Filters
+          </button>
+          <button
+            onClick={handleClearFilters}
+            className="w-44 px-4 py-2 bg-gradient-to-r text-blue-700 rounded-xl shadow-lg hover:shadow-xl 
+    transform hover:-translate-y-0.5 transition duration-200 font-semibold text-sm"
+          >
+            Clear Filters
+          </button>
+        </div>
       </div>
     </div>
   );

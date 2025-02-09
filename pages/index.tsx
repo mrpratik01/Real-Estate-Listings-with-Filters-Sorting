@@ -8,6 +8,7 @@ import {
   getProperties,
   filterProperties,
   sortProperties,
+  SortOption,
 } from "../services/propertyServices";
 import Layout from "../pages/layout";
 import Filters from "../components/Filters";
@@ -22,7 +23,8 @@ const HomePage = ({ initialProperties }: HomePageProps) => {
   //using useState to set the filters and sortby
 
   const [filters, setFilters] = useState<{ minPrice?: number; maxPrice?: number; bedrooms?: number }>({});
-  const [sortBy, setSortBy] = useState<"price-asc" | "price-desc" | "recent" | "size">("recent");
+  const [sortBy, setSortBy] = useState<SortOption>("recent");
+
 
   // memoizing the filtered and sorted properties
 
@@ -39,7 +41,7 @@ const HomePage = ({ initialProperties }: HomePageProps) => {
     setFilters(newFilters);
   }, []);
 
-  const handleSortChange = useCallback((newSortBy: typeof sortBy) => {
+  const handleSortChange = useCallback((newSortBy: SortOption) => {
     setSortBy(newSortBy);
   }, []);
 

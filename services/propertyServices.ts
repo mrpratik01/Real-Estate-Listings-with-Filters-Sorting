@@ -2,6 +2,8 @@
 //Fetching data from the API router and filtering and sorting the data based on the user's input.
 
 import { Property } from "../types/property";
+export type SortOption = 'price-asc' | 'price-desc' | 'recent' | 'size' | 'alpha-asc' | 'alpha-desc';
+
 
 export const getProperties = async (): Promise<Property[]> => {
   const response = await fetch(`http://localhost:3000/api/properties`);
@@ -52,7 +54,7 @@ export const filterProperties = (
 
 export const sortProperties = (
   properties: Property[], 
-  sortBy: 'price-asc' | 'price-desc' | 'recent' | 'size'
+  sortBy: SortOption
 ): Property[] => {
   return [...properties].sort((a, b) => {
     switch (sortBy) {
@@ -64,6 +66,10 @@ export const sortProperties = (
         return new Date(b.added).getTime() - new Date(a.added).getTime();
       case 'size':
         return parseFloat(b.size) - parseFloat(a.size);
+      case 'alpha-asc':
+        return a.address.localeCompare(b.address);
+      case 'alpha-desc':
+        return b.address.localeCompare(a.address);
       default:
         return 0;
     }
